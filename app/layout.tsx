@@ -1,6 +1,42 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuLink,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+} from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@/components/ui/collapsible";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
+import {
+  Package2Icon,
+  SettingsIcon,
+  UserIcon,
+  LogOutIcon,
+  MenuIcon,
+  PlaneIcon,
+  ChevronRightIcon,
+} from "@/components/component/Icons";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,13 +46,212 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <header className="sticky top-0 z-40 border-b bg-background">
+          <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+            <Link
+              href="#"
+              className="flex items-center gap-2 hidden lg:flex"
+              prefetch={false}
+            >
+              <span className="font-bold mr-3">Airport Access Control</span>
+            </Link>
+            <NavigationMenu className="mr-auto hidden lg:flex">
+              <NavigationMenuList>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                    prefetch={false}
+                  >
+                    Home
+                  </Link>
+                </NavigationMenuLink>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/dashboard"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                    prefetch={false}
+                  >
+                    DashBoard
+                  </Link>
+                </NavigationMenuLink>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/airport-map"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                    prefetch={false}
+                  >
+                    Airport Map
+                  </Link>
+                </NavigationMenuLink>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid w-[550px] grid-cols-2 p-2">
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href="#"
+                          className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-background p-4 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                          prefetch={false}
+                        >
+                          <div className="text-sm font-medium leading-none group-hover:underline">
+                            Whitepapers
+                          </div>
+                          <div className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            Read our industry insights and best practices.
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href="#"
+                          className="group grid h-auto w-full items-center justify-start gap-1 rounded-md bg-background p-4 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                          prefetch={false}
+                        >
+                          <div className="text-sm font-medium leading-none group-hover:underline">
+                            Blog
+                          </div>
+                          <div className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            Check out our latest industry news and updates.
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="#"
+                    className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                    prefetch={false}
+                  >
+                    Contact
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuList>
+            </NavigationMenu>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon" className="lg:hidden">
+                  <MenuIcon className="h-6 w-6" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left">
+                <Link href="#" prefetch={false}>
+                  <PlaneIcon className="h-6 w-6" />
+                  <span className="sr-only">Airport Access Control</span>
+                </Link>
+                <div className="grid gap-2 py-6">
+                  <Link
+                    href="/"
+                    className="flex w-full items-center py-2 text-lg font-semibold"
+                    prefetch={false}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    href="/dashboard"
+                    className="flex w-full items-center py-2 text-lg font-semibold"
+                    prefetch={false}
+                  >
+                    DashBoard
+                  </Link>
+                  <Link
+                    href="/airport-map"
+                    className="flex w-full items-center py-2 text-lg font-semibold"
+                    prefetch={false}
+                  >
+                    Airport Map
+                  </Link>
+                  <Collapsible className="grid gap-4">
+                    <CollapsibleTrigger className="flex w-full items-center text-lg font-semibold [&[data-state=open]>svg]:rotate-90">
+                      Resources{" "}
+                      <ChevronRightIcon className="ml-auto h-5 w-5 transition-all" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <div className="-mx-6 grid gap-6 bg-muted p-6">
+                        <Link
+                          href="#"
+                          className="group grid h-auto w-full justify-start gap-1"
+                          prefetch={false}
+                        >
+                          <div className="text-sm font-medium leading-none group-hover:underline">
+                            Whitepapers
+                          </div>
+                          <div className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            Read our industry insights and best practices.
+                          </div>
+                        </Link>
+                        <Link
+                          href="#"
+                          className="group grid h-auto w-full justify-start gap-1"
+                          prefetch={false}
+                        >
+                          <div className="text-sm font-medium leading-none group-hover:underline">
+                            Blog
+                          </div>
+                          <div className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            Check out our latest industry news and updates.
+                          </div>
+                        </Link>
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                  <Link
+                    href="#"
+                    className="flex w-full items-center py-2 text-lg font-semibold"
+                    prefetch={false}
+                  >
+                    Contact
+                  </Link>
+                </div>
+              </SheetContent>
+            </Sheet>
+            <div className="flex items-center gap-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage
+                        src="/placeholder-user.jpg"
+                        alt="@username"
+                      />
+                      <AvatarFallback>JD</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel>Signed in as John Doe</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <UserIcon className="mr-2 h-4 w-4" />
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <SettingsIcon className="mr-2 h-4 w-4" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <LogOutIcon className="mr-2 h-4 w-4" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
